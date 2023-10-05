@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.ocrtest.ai.OcrProc;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,7 +27,7 @@ public class OcrActivity extends BaseActivity  {
         SharedPreferences sharedPref = getSharedPreferences("PREF", Context.MODE_PRIVATE);
 
         final String ocrApiGwUrl = sharedPref.getString("ocr_api_gw_url", "");
-        final String ocrSecretKey = "TWNtR1BxZ3dVZ0twVXBWZmVRTU9LandXenBRd05oRWI=";
+        final String ocrSecretKey = "bU9yZm5uUGx6V2dKcVRDTkttUlRlWFZiUWtXaEN0VXQ=";
         Button ocrTranslateBtn;
 
         ocrTranslateBtn = (Button) findViewById(R.id.btn_ocr_translate);
@@ -73,12 +74,12 @@ public class OcrActivity extends BaseActivity  {
                     translateText.append(" ");
                 }
             }
-
             TextView txtResult = findViewById(R.id.textView_ocr_result);
             txtResult.setText(translateText.toString());
+            Log.i("text", translateText.toString());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("error", e.toString());
         }
     }
 }
