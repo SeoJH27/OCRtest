@@ -6,9 +6,10 @@ plugins {
 
 android {
     namespace = "com.example.ocrtest"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
+        multiDexEnabled = true
         applicationId = "com.example.ocrtest"
         minSdk = 24
         targetSdk = 33
@@ -31,13 +32,26 @@ android {
     buildToolsVersion = "33.0.2"
 }
 
+android {
+    packagingOptions {
+        pickFirst("META-INF/DEPENDENCIES")
+    }
+}
+
+android {
+    packagingOptions {
+        exclude ("META-INF/DEPENDENCIES")
+    }
+}
+
 dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
+    implementation("com.google.android.material:material:1.10.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation ("io.reactivex.rxjava2:rxjava:2.2.6")
+    implementation ("io.reactivex.rxjava2:rxjava:2.2.21")
     implementation ("io.reactivex.rxjava2:rxandroid:2.1.1")
+    implementation ("com.amazonaws:aws-java-sdk-s3:1.12.571")
 }
 
