@@ -1,7 +1,5 @@
 package com.example.ocrtest;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.ocrtest.ai.OcrProc;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.Observable;
 
 public class OcrActivity extends BaseActivity  {
 
@@ -24,9 +17,7 @@ public class OcrActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ocr);
 
-        SharedPreferences sharedPref = getSharedPreferences("PREF", Context.MODE_PRIVATE);
-
-        final String ocrApiGwUrl = sharedPref.getString("ocr_api_gw_url", "");
+        final String ocrApiGwUrl = "https://wuruk0p342.apigw.ntruss.com/custom/v1/25116/1b481823b785af66fad5bb3187dcf8904363afa68fdcde0339e1089e1db637ee/general";
         final String ocrSecretKey = "bU9yZm5uUGx6V2dKcVRDTkttUlRlWFZiUWtXaEN0VXQ=";
         Button ocrTranslateBtn;
 
@@ -35,13 +26,13 @@ public class OcrActivity extends BaseActivity  {
 
             @Override
             public void onClick(View v) {
-                OcrActivity.PapagoNmtTask nmtTask = new OcrActivity.PapagoNmtTask();
-                nmtTask.execute(ocrApiGwUrl, ocrSecretKey);
+                ThreadClass thc = new ThreadClass();
+                thc.execute(ocrApiGwUrl, ocrSecretKey);
             }
         });
     }
 
-    public class PapagoNmtTask extends AsyncTask<String, String, String> {
+    public class ThreadClass extends AsyncTask<String, String, String> {
 
         @Override
         public String doInBackground(String... strings) {
@@ -50,7 +41,6 @@ public class OcrActivity extends BaseActivity  {
 
         @Override
         protected void onPostExecute(String result) {
-
             ReturnThreadResult(result);
         }
     }
@@ -58,6 +48,7 @@ public class OcrActivity extends BaseActivity  {
     public void ReturnThreadResult(String result) {
         System.out.println("###  Return Thread Result");
         StringBuilder translateText = new StringBuilder();
+        Log.i("text", result);
 
         try {
             JSONObject jsonObject = new JSONObject(result);
@@ -79,7 +70,7 @@ public class OcrActivity extends BaseActivity  {
             Log.i("text", translateText.toString());
 
         } catch (Exception e) {
-            Log.e("error", e.toString());
+            Log.e("error?", e.toString());
         }
     }
 }

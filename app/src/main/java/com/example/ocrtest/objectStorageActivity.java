@@ -10,12 +10,12 @@ import com.amazonaws.services.s3.model.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-
+/*
 public class objectStorageActivity {
     final String endPoint = "http://sch.ocu.ksj.s3-website.kr.object.ncloudstorage.com";
     final String regionName = "fin-standard";
-    final String accessKey = "ACCESS_KEY";
-    final String secretKey = "SECRET_KEY";
+    final String accessKey = "T9bnSXulx2JEfCRxcYLK";
+    final String secretKey = "NyRkN6c1Xn0AcCisXMMT3iPWNbaekJn3UHWlAO2l";
 
     // S3 client
     final AmazonS3 s3 = AmazonS3ClientBuilder.standard()
@@ -55,3 +55,4 @@ public class objectStorageActivity {
             e.printStackTrace();
         }
 }
+*/
